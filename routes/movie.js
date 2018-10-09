@@ -15,16 +15,29 @@ router.post('/', function(req, res, next) {
   //   country: country,
   //   year: year
   // });
-
+  
+// alternative to up version:
   const movie = new Movie(req.body)
 
 
-  movie.save((err,data)=>{
-    if (err)
-      res.json(err)
-    else
-      res.json({status : 1})
+  // movie.save((err,data)=>{
+  //   if (err)
+  //     res.json(err)
+  //   else
+  //     res.json({status : 1})
+  // }) 
+  
+  // alternative to up version:
+
+
+  const promise = movie.save()
+  promise.then((data)=>{
+    res.json({status: 1})
+  }).catch((err)=>{
+    res.json(err)
   })
+
+
 });
 
 module.exports = router;
