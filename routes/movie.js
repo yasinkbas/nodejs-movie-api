@@ -19,7 +19,7 @@ router.get('/',(req,res)=>{
  */
 
 router.get('/top10',(req,res) =>{
-  const promise = Movie.find({ }).limit(10).sort({ imdb_score: -1})
+  const promise = Movie.find({ }).limit(10).sort({ imdb_score: -1}) // -1 this sorting descending order 
 
   promise.then((movie)=>{
     if (!movie)
