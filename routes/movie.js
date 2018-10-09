@@ -47,14 +47,16 @@ router.post('/', function(req, res, next) {
 
 });
 
-router.get('/:movie_id',(req,res) =>{
+router.get('/:movie_id',(req,res,next) =>{
   const promise = Movie.findById(req.params.movie_id)
 
   // res.send(req.params.movie_id) // eger direk olarak eq.params.movie_id dersek direk o degeri yazacak
   promise.then((movie)=>{
+    if (!movie)
+      next({message: 'The movie was not found'});
     res.json(movie)
   }).catch((err)=>{
-    res.json(err)
+    res.json({error: "The movie has not found"})
   })
 });
 
