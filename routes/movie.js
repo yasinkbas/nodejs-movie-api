@@ -69,7 +69,8 @@ router.get('/:movie_id',(req,res,next) =>{
 router.put('/:movie_id',(req,res,next) =>{
   const promise = Movie.findByIdAndUpdate(
     req.params.movie_id,
-    req.body
+    req.body,
+    {new : true} // geriye yeni degeri dondurur
     )
 
   // res.send(req.params.movie_id) // eger direk olarak eq.params.movie_id dersek direk o degeri yazacak
@@ -77,6 +78,24 @@ router.put('/:movie_id',(req,res,next) =>{
     if (!movie)
       next({message: 'The movie was not found'});
     res.json(movie)
+  }).catch((err)=>{
+    res.json("The movie was not found")
+  })
+});
+
+/*
+ * gonderilen id'deki datayi veritabanindan siler
+ * @desc deleting this data in db
+ */
+
+router.delete('/:movie_id',(req,res,next) =>{
+  const promise = Movie.findByIdAndRemove(req.params.movie_id)
+
+  // res.send(req.params.movie_id) // eger direk olarak eq.params.movie_id dersek direk o degeri yazacak
+  promise.then((movie)=>{
+    if (!movie)
+      next({message: 'The movie was not found'});
+    res.json({status: 1})
   }).catch((err)=>{
     res.json("The movie was not found")
   })
