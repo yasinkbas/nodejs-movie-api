@@ -56,7 +56,7 @@ router.get('/:movie_id',(req,res,next) =>{
       next({message: 'The movie was not found'});
     res.json(movie)
   }).catch((err)=>{
-    res.json({error: "The movie has not found"})
+    res.json("The movie was not found")
   })
 });
 
