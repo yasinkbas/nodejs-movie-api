@@ -13,6 +13,24 @@ router.get('/',(req,res)=>{
     res.json(err)
   })
 })
+/**
+ * Top 10 listeleme 
+ * @desc list of Top
+ */
+
+router.get('/top10',(req,res) =>{
+  const promise = Movie.find({ }).limit(10).sort({ imdb_score: -1})
+
+  promise.then((movie)=>{
+    if (!movie)
+      next({message: 'The movie was not found'});
+    res.json(movie)
+  }).catch((err)=>{
+    res.json(err)
+  })
+});
+
+
 router.post('/', function(req, res, next) {
   // const {title, imdb_score, category, country, year} = req.body;
   
@@ -46,6 +64,8 @@ router.post('/', function(req, res, next) {
 
 });
 
+
+
 router.get('/:movie_id',(req,res,next) =>{
   const promise = Movie.findById(req.params.movie_id)
 
@@ -60,7 +80,7 @@ router.get('/:movie_id',(req,res,next) =>{
 });
 
 
-/*
+/** 
  * gelen deger ile veriyi eslestirip put seklinde gelen data ile o buldugu veriyi degistirecek
  * ve deger olarak eski veriyi dondurur
  * @desc changing data with by id and update
@@ -73,7 +93,6 @@ router.put('/:movie_id',(req,res,next) =>{
     {new : true} // geriye yeni degeri dondurur
     )
 
-  // res.send(req.params.movie_id) // eger direk olarak eq.params.movie_id dersek direk o degeri yazacak
   promise.then((movie)=>{
     if (!movie)
       next({message: 'The movie was not found'});
@@ -83,7 +102,7 @@ router.put('/:movie_id',(req,res,next) =>{
   })
 });
 
-/*
+/** 
  * gonderilen id'deki datayi veritabanindan siler
  * @desc deleting this data in db
  */
@@ -91,7 +110,6 @@ router.put('/:movie_id',(req,res,next) =>{
 router.delete('/:movie_id',(req,res,next) =>{
   const promise = Movie.findByIdAndRemove(req.params.movie_id)
 
-  // res.send(req.params.movie_id) // eger direk olarak eq.params.movie_id dersek direk o degeri yazacak
   promise.then((movie)=>{
     if (!movie)
       next({message: 'The movie was not found'});
@@ -100,5 +118,7 @@ router.delete('/:movie_id',(req,res,next) =>{
     res.json("The movie was not found")
   })
 });
+
+
 
 module.exports = router;
