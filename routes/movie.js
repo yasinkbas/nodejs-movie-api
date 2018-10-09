@@ -5,6 +5,14 @@ const router = express.Router();
 const Movie = require('../models/Movie');
 
 /* Post users listing. */
+router.get('/',(req,res)=>{
+  const promise = Movie.find({ })
+  promise.then((data) =>{
+    res.json(data)
+  }).catch((err)=>{
+    res.json(err)
+  })
+})
 router.post('/', function(req, res, next) {
   // const {title, imdb_score, category, country, year} = req.body;
   
@@ -20,6 +28,7 @@ router.post('/', function(req, res, next) {
   const movie = new Movie(req.body)
 
 
+
   // movie.save((err,data)=>{
   //   if (err)
   //     res.json(err)
@@ -28,8 +37,6 @@ router.post('/', function(req, res, next) {
   // }) 
   
   // alternative to up version:
-
-
   const promise = movie.save()
   promise.then((data)=>{
     res.json({status: 1})
@@ -38,6 +45,17 @@ router.post('/', function(req, res, next) {
   })
 
 
+});
+
+router.get('/:movie_id',(req,res) =>{
+  const promise = Movie.findById(req.params.movie_id)
+
+  // res.send(req.params.movie_id) // eger direk olarak eq.params.movie_id dersek direk o degeri yazacak
+  promise.then((movie)=>{
+    res.json(movie)
+  }).catch((err)=>{
+    res.json(err)
+  })
 });
 
 module.exports = router;
