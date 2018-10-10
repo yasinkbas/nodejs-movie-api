@@ -8,6 +8,9 @@ const indexRouter = require('./routes/index');
 const movie = require('./routes/movie');
 const director = require('./routes/director');
 
+//Middleware
+const verifyToken = require('./middleware/verify-token')
+
 
 const app = express();
 // db Connection
@@ -28,6 +31,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/api',verifyToken)
 app.use('/api/movies', movie);
 app.use('/api/directors', director)
 
