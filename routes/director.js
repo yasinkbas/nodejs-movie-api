@@ -170,6 +170,25 @@ router.get('/:director_id',(req,res)=>{
     })
 })
 
+/**
+ * provides to change director id attributes
+ */
+
+router.put('/:director_id',(req,res,next) =>{
+    const promise = Director.findByIdAndUpdate(
+      req.params.director_id,
+      req.body,
+      {new : true} // geriye yeni degeri dondurur
+      )
+  
+    promise.then((director)=>{
+      if (!director)
+        next({message: 'The director was not found'});
+      res.json(director)
+    }).catch((err)=>{
+      res.json("The director was not found")
+    })
+  });
 
 
 
