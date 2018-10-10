@@ -119,6 +119,30 @@ router.delete('/:movie_id',(req,res,next) =>{
   })
 });
 
+/**
+ * Between route
+ * belirli yillar arasindaki datayi gondermek
+ * @example:http://localhost:3001/api/movies/between/1980/2100
+ */
 
+router.get('/between/:start_year/:end_year',(req,res)=>{
+  const {start_year,end_year} = req.params
+  const promise = Movie.find(
+    { 
+      year: {"$gte":parseInt(start_year), "$lte": parseInt(end_year)} // it doesn't need parseInt but i added 
+      /**
+       * gte: big and equals data
+       * lte: low and equals data
+       * gt: big data only
+       * lt: low data only
+       */
+    
+    })
+  promise.then((data) =>{
+    res.json(data)
+  }).catch((err)=>{
+    res.json(err)
+  })
+})
 
 module.exports = router;
