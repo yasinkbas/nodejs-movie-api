@@ -190,6 +190,22 @@ router.put('/:director_id',(req,res,next) =>{
     })
   });
 
+/**
+ * delete director in database 
+ * @returns status 1 
+ */
+
+  router.delete('/:director_id',(req,res,next) =>{
+    const promise = Director.findByIdAndRemove(req.params.director_id)
+  
+    promise.then((director)=>{
+      if (!director)
+        next({message: 'The director was not found'});
+      res.json({status: 1})
+    }).catch((err)=>{
+      res.json("The director was not found")
+    })
+  });
 
 
 module.exports = router;
