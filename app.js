@@ -12,7 +12,9 @@ const director = require('./routes/director');
 const app = express();
 // db Connection
 const db = require('./helper/db')(); // function started with "()"
-
+//config
+const config = require('./config')
+app.set('api_secret_key',config.api_secret_key)
 
 
 // view engine setup
