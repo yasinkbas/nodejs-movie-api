@@ -33,6 +33,6 @@
 
 
 ## Demo
-[Live demo on Heroku]()
+[Live demo on Heroku]() sorry! this not ready right now! 
 
 enjoy!
