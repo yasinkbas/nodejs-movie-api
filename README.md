@@ -33,6 +33,6 @@
 
 
 ## Demo
-[Live demo on Heroku](https://yasin-kbas-movie-api.herokuapp.com) sorry! this is not ready right now! 
+[Live demo on Heroku](https://yasin-kbas-movie-api.herokuapp.com) 
 
 enjoy!
