@@ -32,7 +32,6 @@
 | /authenticate | `POST` | { username: 'foo', password:'1234' } | Generate a token. |
 
 
-## Demo
-[Live demo on Heroku](https://yasin-kbas-movie-api.herokuapp.com) 
+
 
 enjoy!
